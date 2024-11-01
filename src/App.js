@@ -75,7 +75,7 @@ function App() {
           <input
             className="shares-form-input"
             type="number"
-            placeholder="owned shares"
+            placeholder={sharesOwned.length ? `${sharesOwned} Shares` : `Owned Shares`}
             onChange={(event) => saveSharesText(event.target.value)}
           />
         </form>
@@ -83,7 +83,7 @@ function App() {
           <input
             className="symbols-form-input"
             type="text"
-            placeholder="symbol"
+            placeholder={stockSymbol.length ? `Symbol: ${stockSymbol}` : `Symbol`}
             onChange={(event) => setInputText(event.target.value)}
           />
           {bestMatches && (
