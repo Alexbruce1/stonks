@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [formText, setFormText] = useState("");
-  const [sharesText, setSharesText] = useState();
+  const [sharesText, setSharesText] = useState("");
   const [sharesOwned, setSharesOwned] = useState(localStorage.getItem("sharesOwned") || "");
   const [stockSymbol, setStockSymbol] = useState(localStorage.getItem("stockSymbol") || "LLY");
   const [stockPrice, setStockPrice] = useState(localStorage.getItem("stockPrice") || "");
@@ -87,8 +87,9 @@ function App() {
             className="symbols-form-input"
             type="text"
             placeholder={stockSymbol.length ? `Symbol: ${stockSymbol}` : `Symbol`}
-            onChange={(event) => setInputText(event.target.value)}
-          />
+            value={sharesText.toUpperCase()} // Convert to uppercase for display
+            onChange={(event) => setSharesText(event.target.value)} // Save original input
+                  />
           {bestMatches && (
             <ul className="best-matches-list">
               {bestMatches.map(option => (
