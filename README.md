@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Stock Portfolio Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple stock-tracking application to monitor the value of a single stock holding based on real-time price updates and the number of shares owned. This app stores the selected stock symbol and portfolio data, allowing you to view your equity’s value conveniently.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Single Equity Tracking**: Store a single stock symbol to track.
+- **Real-Time Price Updates**: Fetch the latest stock price from Alpha Vantage and display it.
+- **Portfolio Value Calculation**: Calculate and display the total value based on the latest stock price and the number of shares owned.
+- **Local Storage**: Save stock symbol, shares owned, and portfolio value for easy access when reopening the app.
 
-### `npm start`
+## How to Use
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Enter a Stock Symbol**: Input a stock symbol in the search bar to select a stock.
+2. **Enter Shares Owned**: Input the number of shares owned for the selected stock.
+3. **View Portfolio Value**: The app will display the latest price and calculate the portfolio value based on the entered shares.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## API
 
-### `npm test`
+This app uses the Alpha Vantage API to fetch real-time stock data. You’ll need an API key from Alpha Vantage to use this app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- **React**: For building the UI.
+- **JavaScript**: For logic and calculations.
+- **Alpha Vantage API**: For real-time stock price data.
+- **AWS Amplify**: For app deployment.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app is deployed on AWS Amplify and can be accessed here: [Stock Portfolio Tracker on AWS](https://main.d2vchp228scbdb.amplifyapp.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Notes
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This app is intended for personal use to monitor a single equity in your portfolio.
