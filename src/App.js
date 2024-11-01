@@ -14,13 +14,16 @@ function App() {
   useEffect(() => {
     if (stockSymbol) {
       fetchStockDataIntraDay(stockSymbol).then(data => {
-        const latestPrice = Object.values(data)[0]["4. close"];
-        setStockPrice(latestPrice);
-        localStorage.setItem("stockPrice", latestPrice);
+        if (data && Object.keys(data).length > 0) {
+          setStockPrice(Object.values(data)[0]["4. close"]);
+        } else {
+          console.error("Data is undefined or empty:", data);
+        }
+      }).catch(error => {
+        console.error("Error fetching stock data:", error);
       });
     }
   }, [stockSymbol]);
-
   useEffect(() => {
     if (stockPrice && sharesOwned) {
       const calculatedValue = Math.round(stockPrice * sharesOwned * 100);
