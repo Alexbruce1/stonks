@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: #fff;
 }
 
 .App-header {
@@ -11,3 +12,42 @@
   padding: 12px 0;
 }
 
+.forms-container {
+  padding: 20px;
+  border: 2px solid #222;
+  border-radius: 16px;
+  width: 250px;
+  margin: 20px auto;
+}
+
+.symbols-form-input,
+.shares-form-input {
+  margin: 10px auto;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 8px;
+  outline: none;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+.best-matches-list {
+  background-color: #555;
+  border-radius: 8px;
+  width: 200px;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 0;
+}
+
+.stock-symbol-match {
+  padding: 2px 5px;
+  margin: 0;
+  display: flex;
+}
+
+.match-name {
+  overflow: hidden;
+  height: 20px;
+}
