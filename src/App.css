@@ -12,6 +12,32 @@
   padding: 12px 0;
 }
 
+.stock-entity-container {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  max-width: 400px;
+  margin: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.stock-price,
+.stock-symbol {
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.shares-owned {
+  margin: 10px auto;
+  line-height: 1.2;
+}
+
+.portfolio-value {
+  line-height: 1.2;
+  margin: 10px auto;
+}
+
 .forms-container {
   padding: 20px;
   border: 2px solid #222;

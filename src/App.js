@@ -62,10 +62,10 @@ function App() {
       <header className="App-header">Stonks 📈</header>
       <div className="stock-price-display">
         {stockSymbol && (
-          <div>
+          <div className="stock-entity-container">
             <h1 className="stock-symbol">{stockSymbol}</h1>
+            {stockPrice && <h1 className="stock-price">${Number(stockPrice).toFixed(2)}</h1>}
           </div>)}
-        {stockPrice && <h1>${Number(stockPrice).toFixed(2)}</h1>}
       </div>
       {sharesOwned && <h2 className="shares-owned">Shares Owned: {sharesOwned}</h2>}
       {portfolioValue && (
@@ -87,8 +87,8 @@ function App() {
             className="symbols-form-input"
             type="text"
             placeholder={stockSymbol.length ? `Symbol: ${stockSymbol}` : `Symbol`}
-            value={sharesText.toUpperCase()} // Convert to uppercase for display
-            onChange={(event) => setSharesText(event.target.value)} // Save original input
+            value={sharesText.toUpperCase()}
+            onChange={(event) => setSharesText(event.target.value)}
                   />
           {bestMatches && (
             <ul className="best-matches-list">
