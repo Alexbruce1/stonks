@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchStockSymbols, fetchStockDataIntraDay } from "./api";
+import { fetchStockSymbols, fetchStockDataIntraDay, fetchNews } from "./api";
 import "./App.css";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   const [stockPrice, setStockPrice] = useState(localStorage.getItem("stockPrice") || "");
   const [bestMatches, setBestMatches] = useState([]);
   const [portfolioValue, setPortfolioValue] = useState(localStorage.getItem("portfolioValue") || "");
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     if (stockSymbol) {
@@ -23,7 +24,12 @@ function App() {
         console.error("Error fetching stock data:", error);
       });
     }
+
+    fetchNews(stockSymbol).then(data => {
+      setArticles(data)
+    })
   }, [stockSymbol]);
+
   useEffect(() => {
     if (stockPrice && sharesOwned) {
       const calculatedValue = Math.round(stockPrice * sharesOwned * 100);
@@ -102,6 +108,30 @@ function App() {
           )}
         </form>
       </div>
+      {stockSymbol && (
+        <div className="news-container">
+          { articles && articles.length && (
+            articles.map(article => {
+              return (
+                <article
+                  onClick={() => window.open(`${article.url}`, "_blank")}
+                  className="article">
+                  <img
+                    className="article-image"
+                    src={article.image}/>
+                  <div className="article-text-container">
+                    <h3 className="article-title article-text">
+                      {article.title}
+                      <strong className="article-publication article-text">{article.source.name}</strong>
+                    </h3>
+                    <p className="article-desctiption article-text">{article.description}</p>
+                  </div>
+                </article>
+              )
+            })
+          )}
+        </div>
+      )}
     </div>
   );
 }

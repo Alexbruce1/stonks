@@ -42,7 +42,8 @@
   padding: 20px;
   border: 2px solid #222;
   border-radius: 16px;
-  width: 250px;
+  box-sizing: border-box;
+  width: 95%;
   margin: 20px auto;
 }
 
@@ -76,4 +77,48 @@
 .match-name {
   overflow: hidden;
   height: 20px;
+}
+
+.news-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.article {
+  background: linear-gradient( #444, #222);
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 10px;
+  text-align: left;
+  text-decoration: none;
+  color: #eee;
+}
+
+.article-image {
+  height: 300px;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.article-text-container {
+  padding: 10px;
+}
+
+.article-text {
+  padding: 0;
+  margin: 5px auto;
+}
+
+.article-title {
+  font-size: 16px;
+}
+
+.article-publication {
+  padding-left: 8px;
+  color: #aaa;
+  font-weight: 700;
+}
+
+.article-description {
+  line-height: 1.3;
 }
