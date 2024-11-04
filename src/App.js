@@ -44,10 +44,11 @@ function App() {
     localStorage.setItem("sharesOwned", sharesText);
   };
 
-  const getSymbols = (event) => {
+  const getSymbols = async (event) => {
     event.preventDefault();
     if (formText) {
-      fetchStockSymbols(formText).then(response => {
+      try {
+        const response = await fetchStockSymbols(formText);
         const perfectMatch = response.find(symbol => symbol["9. matchScore"] === "1.0000");
         if (perfectMatch) {
           const selectedSymbol = perfectMatch["1. symbol"];
@@ -56,10 +57,13 @@ function App() {
         } else {
           setBestMatches(response);
         }
-      });
+      } catch (error) {
+        console.error("Error fetching stock symbols:", error);
+        alert("Failed to fetch stock symbols. Please try again later.");
+      }
     }
   };
-
+  
   const saveSharesText = value => setSharesText(value);
   const setInputText = value => setFormText(value);
 
@@ -73,11 +77,21 @@ function App() {
             {stockPrice && <h1 className="stock-price">${Number(stockPrice).toFixed(2)}</h1>}
           </div>)}
       </div>
-      {sharesOwned && <h2 className="shares-owned">Shares Owned: {sharesOwned}</h2>}
+      {sharesOwned && (
+        <div className="shares-owned">
+          <h1>Shares Owned:</h1>
+          <h1>{sharesOwned}</h1>
+        </div>
+      )}
       {portfolioValue && (
-        <h1 className="portfolio-value">
-          Value: ${(portfolioValue / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-        </h1>
+        <div className="portfolio-value">
+          <h1 className="portfolio-value-word">
+            Value: 
+          </h1>
+          <h1 className="portfolio-value-number">
+            ${(portfolioValue / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </h1>
+        </div>
       )}
       <div className="forms-container">
         <form className="shares-form" onSubmit={updateSharesOwned}>
@@ -85,17 +99,15 @@ function App() {
             className="shares-form-input"
             type="number"
             placeholder={sharesOwned.length ? `${sharesOwned} Shares` : `Owned Shares`}
-            onChange={(event) => saveSharesText(event.target.value)}
-          />
+            onChange={(event) => saveSharesText(event.target.value)}/>
         </form>
         <form className="symbols-form" onSubmit={getSymbols}>
           <input
             className="symbols-form-input"
             type="text"
             placeholder={stockSymbol.length ? `Symbol: ${stockSymbol}` : `Symbol`}
-            value={sharesText.toUpperCase()}
-            onChange={(event) => setSharesText(event.target.value)}
-                  />
+            value={formText.toUpperCase()}
+            onChange={(event) => setInputText(event.target.value)}/>
           {bestMatches && (
             <ul className="best-matches-list">
               {bestMatches.map(option => (
