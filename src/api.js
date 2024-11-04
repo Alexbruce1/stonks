@@ -3,16 +3,28 @@ import axios from "axios";
 const stocksApiKey = process.env.REACT_APP_AV_API_KEY;
 const newsApiKey = process.env.REACT_APP_NEWS_API_KEY;
 
-export const fetchStockSymbols = async keyword => {
+export const fetchStockSymbols = async (keyword, retries = 1, delay = 5000) => {
   const symbolSearchUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${stocksApiKey}`;
-  try {
+  
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await axios.get(symbolSearchUrl);
+      
+      if (response.data && response.data.bestMatches) {
+        return response.data.bestMatches;
+      }
+      
+      console.warn(`Attempt ${attempt} failed: No data received. Retrying...`);
+      
+    } catch (error) {
+      console.error(`Error fetching symbols on attempt ${attempt}:`, error);
+      
+      if (attempt === retries) {
+        throw new Error("Max retries reached. Failed to fetch stock symbols.");
+      }
+    }
     
-    const response = await axios.get(symbolSearchUrl)
-    console.log(response.data.bestMatches)
-    return response.data.bestMatches;
-  } catch (error) {
-    console.error("Error fetching symbols: ", error);
-    throw error;
+    await new Promise(resolve => setTimeout(resolve, delay));
   }
 };
 
@@ -31,7 +43,6 @@ export const fetchNews = async symbol => {
   const url = `https://gnews.io/api/v4/search?q=stock%20Market%20${symbol}&lang=en&country=us&max=10&apikey=51698e0737cce86daa18284ab4228ba9`;
   try {
     const response = await axios.get(url);
-    console.log(response.data.articles)
     return response.data.articles;
   } catch (error) {
     console.error("Couldn't get news results", error)
