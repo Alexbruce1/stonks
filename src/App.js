@@ -63,13 +63,25 @@ function App() {
       }
     }
   };
+
+  const manualRefresh = () => {
+    fetchStockDataIntraDay(stockSymbol).then(data => {
+      if (data && Object.keys(data).length > 0) {
+        setStockPrice(Object.values(data)[0]["4. close"]);
+      } else {
+        console.error("Data is undefined or empty:", data);
+      }
+    }).catch(error => {
+      console.error("Error fetching stock data:", error);
+    });
+  };
   
   const saveSharesText = value => setSharesText(value);
   const setInputText = value => setFormText(value);
 
   return (
     <div className="App">
-      <header className="App-header">Stonks 📈</header>
+      <header onClick={manualRefresh} className="App-header">Stonks 📈</header>
       <div className="stock-price-display">
         {stockSymbol && (
           <div className="stock-entity-container">
